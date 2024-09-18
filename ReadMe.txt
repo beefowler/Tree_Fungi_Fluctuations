@@ -78,7 +78,7 @@ Leakiness_lines_nitrogen.m
 -------------------------------------------------------------------------------------------------
 
 
-Data: 
+Data files: 
 The csv files in this repository contain values for all data points plotted in each panel of each figure in the manuscript. These are the simulated values produced in the scripts above and described in detail in each of the figure captions. The cvs files are provided here for those who do not wish to run the model scripts to produce the values. Column names and descriptions of variables within each file are provided below. 
 
 
