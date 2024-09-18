@@ -7,7 +7,7 @@ Authors: Bethany L.F. Stevens, Kristen Howard, Laura M. Bogar, Holly V. Moeller.
 
 contact bstevens@ucsb.edu for questions. 
 
-Summary: In this work, we present a model of a simple-tree fungal mutualism in which partner quality changes over time. The model has two distinct environmental conditions and host that can employ carbon reward strategies with varying degrees of preference between higher and lower-quality fungus. We explore the dynamics of this system across environmental regimes and with different reward strategies in order to identify patterns in tree fitness and fungal community composition. 
+Summary: In this work, we present a model of a simple-tree fungal mutualism in which partner quality changes over time. The model has two distinct environmental conditions and a host that can employ carbon reward strategies with varying degrees of preference between higher and lower-quality fungus. We explore the dynamics of this system across environmental regimes and with different reward strategies in order to identify patterns in tree fitness and fungal community composition. 
 
 All scripts in this repository were written and edited by BLFS based on earlier versions in R scripts and pseudocode laid out by all authors. 
 
@@ -35,7 +35,7 @@ Constant_reward_rates.m
 	This script generates Figure 2 in the Manuscript. 
 
 Leakiness_lines.m 
-	This script allows us to compare the success of trees with "leaky" reward strategies of different degrees. Again, we use ode45 to simulate the system of differential equations under various environmental regimes (this time varying T and alpha only) for different values of the total reward rate and leakiness value l. The script stores only the average nonstructural tree carbon pool in the final 3 periods of each simulation for plotting. 
+	This script allows us to compare the success of trees with "leaky" reward strategies of different degrees. Again, we use ode45 to simulate the system of differential equations under various environmental regimes (this time varying T and alpha only) for different values of the total reward rate and leakiness parameter l. The script stores only the average nonstructural tree carbon pool in the final 3 periods of each simulation for plotting. 
 	This script generates Figure 3 in the Manuscript. 
  
 Responsive_reward_strategies.m 
@@ -44,7 +44,7 @@ Responsive_reward_strategies.m
 
 Bifurcation_Supplement_Grouped.nb
 	This script is run in Wolfram Mathematica.
-	This script performs an equilibrium bifurcation analysis for the simplified model presented in part 1 of the supplement (Model dynamics in a constant environment). The system of equations is symbolically defined and then equilibria are calculated for a sweep of values for each parameter in the model. In each panel, all other parameter values are held constant. 
+	This script performs an equilibrium bifurcation analysis for the simplified model presented in part 1 of the supplement (Model dynamics in a constant environment). The system of equations is symbolically defined and then equilibria are calculated for a sweep of values for each parameter in the model. For each subplot, all other parameter values are held constant. 
 	This script generates Figures S1 in the Supplement.
 
 ExtinctionStability_Supplement.m 
@@ -60,7 +60,7 @@ Simulations_supplement.m
 	This script generates Figure S4 in the Supplement. 
 
 Partner_Preference_Supplement.m 
-	This script demonstrates how the analysis presented in Figure 2 is relatively insensitive to the degree of preference between the two fungal partners. It operates along the same lines as constant_reward_rates.m, except with fungal reward ratios of 60:40, 53:48, and 51:49 instead of  1:0. 
+	This script demonstrates how the analysis presented in Figure 2 is relatively insensitive to the degree of preference between the two fungal partners. It operates along the same lines as constant_reward_rates.m, except with fungal reward ratios of 60:40, 53:48, and 51:49 instead of 1:0. 
 	This script generates Figure S5 in the Supplement.
 
 Initial_conditions_coexistence_supplement.m 
@@ -79,11 +79,11 @@ Leakiness_lines_nitrogen.m
 
 
 Data: 
-Values for the data points plotted in each panel of each figure in the manuscript are included in the following csv files. These are the simulated values produced in the scripts above and described in detail in the figure captions. They are provided here for those who do not wish to run the model scripts to produce the simulated values. Column names and descriptions are included below. 
+The csv files in this repository contain values for all data points plotted in each panel of each figure in the manuscript. These are the simulated values produced in the scripts above and described in detail in each of the figure captions. The cvs files are provided here for those who do not wish to run the model scripts to produce the values. Column names and descriptions of variables within each file are provided below. 
 
 
 Figure2_TopPanelsData.csv 
-Data included in upper 3 panels of Figure 2 only. Column 1 is x-coordinate. All curves can be drawn by plotting subsequent columns as y-coordinate against Column 1. 
+Data included in upper 3 panels of Figure 2 only. Column 1, alpha, is x-coordinate. All curves can be drawn by plotting subsequent columns as y-coordinate against alpha. 
 	
 alpha - value of parameter alpha, proportion of time spent in environment A, used as x-coordinate for all lines in these panels 
 
@@ -134,7 +134,7 @@ Panel_3_F2_preference_75percentile - 75th percentile value of C_p (nonstructural
 
 
 Figure2_BottomPanelsData.csv 
-Data included in lower 3 panels of Figure 2 only. Column 1 is x-coordinate. All curves can be drawn by plotting subsequent columns as y-coordinate against Column 1. These panels are simply time series showing the simulation values for nonstructural carbon, C_p, and Fungal carbon, F1 and F2. 
+Data included in lower 3 panels of Figure 2 only. Column 1, time, is x-coordinate. All curves can be drawn by plotting subsequent columns as y-coordinate against time. These panels are simply time series showing the simulation values for nonstructural carbon, C_p, and Fungal carbon, F1 and F2. 
 
 time - time in days since start of the simulation. 
 Panel_1_C_p - Simulated value of nonstructural carbon variable in more severe environment (left panel)
@@ -156,7 +156,7 @@ Panel_3_F2 - Simulated value of Fungus 2 carbon pool in more mild environment (r
 
 	
 Figure3_Data.csv 
-Data included in both panels of Figure 3. Column 1 is x-coordinate. All curves can be drawn by plotting subsequent columns as y-coordinate against Column 1.
+Data included in both panels of Figure 3. Column 1, leakiness, is x-coordinate. All curves can be drawn by plotting subsequent columns as y-coordinate against leakiness.
 
 leakiness - leakiness of host reward strategy. Proportion of reward sent to low quality fungal partner. used as x-coordinate for all lines in these panels 
 Panel1_Cp_1yr - Average value of nonstructural carbon pool (Cp) from final 3 periods of simulations subject to environmental fluctuations with period 1 year and reward rate 0.2. 
@@ -171,22 +171,101 @@ Panel2_Cp_6yr - Average value of nonstructural carbon pool (Cp) from final 3 per
 
 
 Figure4_NoleakinessData.csv
-Data included in leftmost panels of Figure 4 only. Column 1 is x-coordinate. All curves can be drawn by plotting subsequent columns as y-coordinate against Column 1.
+Data included in leftmost panels of Figure 4 only. Column 1, alpha, is x-coordinate. All curves can be drawn by plotting subsequent columns as y-coordinate against alpha.
+
 
 
 alpha - value of parameter alpha, proportion of time spent in environment A, used as x-coordinate for all lines in these panels 
 
-C_p_bet_hedging	
-C_p_switching_25percentile	
-C_p_switching_50percentile	
-C_p_switching_75percentile	
-Fungus_bet_hedging	
-F1_switching_25percentile	
-F1_switching_50percentile	
-F1_switching_75percentile	
-F2_switching_25percentile	
-F2_switching_50percentile	
-F2_switching_75percentile
+C_p_bet_hedging	- value of C_p (nonstructural carbon pool) in bet-hedging scenario. Black horizontal line in top panel. 
+
+C_p_switching_25percentile - 25th percentile value of C_p (nonstructural carbon pool) when tree has switching reward strategy with no leakiness. Lower bound of green shaded region. 
+
+C_p_switching_50percentile - median value of C_p (nonstructural carbon pool) when tree has switching reward strategy with no leakiness. Thick green curve. 
+
+C_p_switching_75percentile- 75th percentile value of C_p (nonstructural carbon pool) when tree has switching reward strategy with no leakiness. Upper bound of green shaded region
+
+Fungus_bet_hedging - value of both F1 and F2 (fungal carbon pools) in bet-hedging scenario. Black horizontal line in bottom panel. 
+
+F1_switching_25percentile - 25th percentile value of F1 (Fungus 1 carbon pool) when tree has switching reward strategy with no leakiness. Lower bound of pink shaded region. 
+	
+F1_switching_50percentile - Median value of F1 (Fungus 1 carbon pool) when tree has switching reward strategy with no leakiness. Thick pink curve. 
+	
+F1_switching_75percentile - 75th percentile value of F1 (Fungus 1 carbon pool) when tree has switching reward strategy with no leakiness. Upper bound of pink shaded region. 
+	
+F2_switching_25percentile - 25th percentile value of F2 (Fungus 2 carbon pool) when tree has switching reward strategy with no leakiness. Lower bound of blue shaded region. 
+
+F2_switching_50percentile - Median value of F2 (Fungus 2 carbon pool) when tree has switching reward strategy with no leakiness. Blue dotted curve.
+
+F2_switching_75percentile - 75th percentile value of F2 (Fungus 2 carbon pool) when tree has switching reward strategy with no leakiness. Upper bound of blue shaded region.
+
+
+
+
+
+
+Figure4_SlightleakinessData.csv
+Data included in middle panels of Figure 4 only. Column 1, alpha, is x-coordinate. All curves can be drawn by plotting subsequent columns as y-coordinate against alpha.
+
+
+alpha - value of parameter alpha, proportion of time spent in environment A, used as x-coordinate for all lines in these panels 
+
+C_p_bet_hedging	- value of C_p (nonstructural carbon pool) in bet-hedging scenario. Black horizontal line in top panel. 
+
+C_p_switching_25percentile - 25th percentile value of C_p (nonstructural carbon pool) when tree has switching reward strategy with leakiness = 0.25. Lower bound of green shaded region. 
+
+C_p_switching_50percentile - median value of C_p (nonstructural carbon pool) when tree has switching reward strategy with leakiness = 0.25. Thick green curve. 
+
+C_p_switching_75percentile- 75th percentile value of C_p (nonstructural carbon pool) when tree has switching reward strategy with leakiness = 0.25. Upper bound of green shaded region
+
+Fungus_bet_hedging - value of both F1 and F2 (fungal carbon pools) in bet-hedging scenario. Black horizontal line in bottom panel. 
+
+F1_switching_25percentile - 25th percentile value of F1 (Fungus 1 carbon pool) when tree has switching reward strategy with leakiness = 0.25. Lower bound of pink shaded region. 
+	
+F1_switching_50percentile - Median value of F1 (Fungus 1 carbon pool) when tree has switching reward strategy with leakiness = 0.25. Thick pink curve. 
+	
+F1_switching_75percentile - 75th percentile value of F1 (Fungus 1 carbon pool) when tree has switching reward strategy with leakiness = 0.25. Upper bound of pink shaded region. 
+	
+F2_switching_25percentile - 25th percentile value of F2 (Fungus 2 carbon pool) when tree has switching reward strategy with leakiness = 0.25. Lower bound of blue shaded region. 
+
+F2_switching_50percentile - Median value of F2 (Fungus 2 carbon pool) when tree has switching reward strategy with leakiness = 0.25. Blue dotted curve.
+
+F2_switching_75percentile - 75th percentile value of F2 (Fungus 2 carbon pool) when tree has switching reward strategy with leakiness = 0.25. Upper bound of blue shaded region.
+
+
+
+
+
+
+
+
+Figure4_ExtremeleakinessData.csv
+Data included in rightmost panels of Figure 4 only. Column 1, alpha, is x-coordinate. All curves can be drawn by plotting subsequent columns as y-coordinate against alpha.
+
+
+alpha - value of parameter alpha, proportion of time spent in environment A, used as x-coordinate for all lines in these panels 
+
+C_p_bet_hedging	- value of C_p (nonstructural carbon pool) in bet-hedging scenario. Black horizontal line in top panel. 
+
+C_p_switching_25percentile - 25th percentile value of C_p (nonstructural carbon pool) when tree has switching reward strategy with leakiness = 0.75. Lower bound of green shaded region. 
+
+C_p_switching_50percentile - median value of C_p (nonstructural carbon pool) when tree has switching reward strategy with leakiness = 0.75. Thick green curve. 
+
+C_p_switching_75percentile- 75th percentile value of C_p (nonstructural carbon pool) when tree has switching reward strategy with leakiness = 0.75. Upper bound of green shaded region
+
+Fungus_bet_hedging - value of both F1 and F2 (fungal carbon pools) in bet-hedging scenario. Black horizontal line in bottom panel. 
+
+F1_switching_25percentile - 25th percentile value of F1 (Fungus 1 carbon pool) when tree has switching reward strategy with leakiness = 0.75. Lower bound of pink shaded region. 
+	
+F1_switching_50percentile - Median value of F1 (Fungus 1 carbon pool) when tree has switching reward strategy with leakiness = 0.75. Thick pink curve. 
+	
+F1_switching_75percentile - 75th percentile value of F1 (Fungus 1 carbon pool) when tree has switching reward strategy with leakiness = 0.75. Upper bound of pink shaded region. 
+	
+F2_switching_25percentile - 25th percentile value of F2 (Fungus 2 carbon pool) when tree has switching reward strategy with leakiness = 0.75. Lower bound of blue shaded region. 
+
+F2_switching_50percentile - Median value of F2 (Fungus 2 carbon pool) when tree has switching reward strategy with leakiness = 0.75. Blue dotted curve.
+
+F2_switching_75percentile - 75th percentile value of F2 (Fungus 2 carbon pool) when tree has switching reward strategy with leakiness = 0.75. Upper bound of blue shaded region.
 
 
  
