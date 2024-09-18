@@ -9,7 +9,7 @@
 g = .1; %growth of plant proportional to Nitrogen pool
 a = .04; %allocation of nonstructural carbon to mychorrhizal carbon pool
 s = 0.01; %senesence of nonstructural carbon
-gamma = 0.005; %loss of mycorrhizal carbon pool to environment
+lambda = 0.005; %loss of mycorrhizal carbon pool to environment
 e1 = 0.01; %efficiency of fungus 1 carbon uptake
 e2 = 0.01; %efficiency of fungus 2 carbon uptake
 m1 = 0.005; %fungus 1 mortality
@@ -63,7 +63,7 @@ for i = 1:length(propA_vals) %cycle through alpha/ evenness values
     envA_treat = @(t) discretize(rem(t, env_period), [0 propA*env_period env_period]) == 1 ; 
 
     %first run simulation for reward strategy 100% fungus 1 in both environments
-    sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, gamma, rtot, rtot, 0, 0, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
+    sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, lambda, rtot, rtot, 0, 0, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
     final_res = deval(sol, tspan(2)-env_period*3:tspan(2));
     results(1,i) = mean(final_res(1,:)); 
     results2A(1,i) = median(final_res(1,:)); 
@@ -111,7 +111,7 @@ for i = 1:length(propA_vals) %cycle through alpha/ evenness values
 
     %next run simulation for reward strategy 100% fungus 2 in both
     %environments
-    sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, gamma, 0, 0, rtot, rtot, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
+    sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, lambda, 0, 0, rtot, rtot, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
     final_res = deval(sol, tspan(2)-env_period*3:tspan(2));
     results(2,i) = mean(final_res(1,:)); 
 
@@ -121,7 +121,7 @@ for i = 1:length(propA_vals) %cycle through alpha/ evenness values
 
 
     %run simulation for reward strategy 50:50
-    sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, gamma, rtot/2, rtot/2, rtot/2, rtot/2, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
+    sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, lambda, rtot/2, rtot/2, rtot/2, rtot/2, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
     final_res = deval(sol, tspan(2)-env_period*3:tspan(2));
     results(3,i) = mean(final_res(1,:)); 
 

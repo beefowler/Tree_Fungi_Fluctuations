@@ -1,5 +1,5 @@
 % Code to show all state variables in a simulation. 
-% Generates Supplement Figure 4 
+% Generates Supplement Figure S4 
 
 % Constant partner preference strategy first 
 % and then merit-based rewards below 
@@ -9,7 +9,7 @@ clear all
 g = .1; %growth of plant proportional to Nitrogen pool
 a = .04; %allocation of nonstructural carbon to mychorrhizal carbon pool
 s = 0.01; %senesence of nonstructural carbon
-gamma = 0.005; %loss of mycorrhizal carbon pool to environment
+lambda = 0.005; %loss of mycorrhizal carbon pool to environment
 e1 = 0.01; %efficiency of fungus 1 carbon uptake
 e2 = 0.01; %efficiency of fungus 2 carbon uptake
 m1 = 0.005; %fungus 1 mortality
@@ -61,7 +61,7 @@ propA = .64; %this is the value of alpha in Figure 2, so we'll use that again.
 envA_treat = @(t) discretize(rem(t, env_period), [0 propA*env_period env_period]) == 1 ;
 
 %first run simulation for reward strategy 100% fungus 1 in both environments
-sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, gamma, rtot, rtot, 0, 0, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
+sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, lambda, rtot, rtot, 0, 0, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
 final_res = deval(sol, tspan(2)-env_period*3:tspan(2));
 
 
@@ -163,7 +163,7 @@ set(findall(gcf,'-property','FontSize'),'FontSize',13)
 % envA_treat = @(t) discretize(rem(t, env_period), [0 propA*env_period env_period]) == 1 ;
 
 %now run simulation for merit-based reward strategy 
-sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, gamma, rtot, 0, 0, rtot, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
+sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, lambda, rtot, 0, 0, rtot, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
 final_res = deval(sol, tspan(2)-env_period*3:tspan(2));
 
 %plot in right hand column 

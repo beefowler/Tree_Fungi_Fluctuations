@@ -19,7 +19,7 @@
         % g, growth of plant proportional to Nitrogen pool
         % a, allocation of nonstructural carbon to mycorrhizal carbon pool
         % s, *delta* in manuscript, loss rate of nonstructural carbon  
-        % l, *gamma* in manuscript, loss rate of mycorrhizal carbon pool to environment
+        % l, *lambda* in manuscript, loss rate of mycorrhizal carbon pool to environment
         % r1_A, reward rate to fungus 1 in environment type A
         % r1_B, reward rate to fungus 1 in environment type B
         % r2_A, reward rate to fungus 2 in environment type A

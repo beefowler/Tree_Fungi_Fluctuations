@@ -10,7 +10,7 @@ figure
 g = .1; %growth of plant proportional to Nitrogen pool
 a = .04; %allocation of Carbon to Carbon pool
 s = 0.01; %senesence of tree biomass
-l = 0.005; %loss of carbon pool to environment
+lambda = 0.005; %loss of carbon pool to environment
 e1 = 0.01; %efficiency of fungus 1 carbon uptake
 e2 = 0.01; %efficiency of fungus 2 carbon uptake
 m1 = 0.004; %fungus 1 mortality
@@ -81,7 +81,7 @@ for init = 1:2 %two rows of different initial conditions
             envA_treat = @(t) discretize(rem(t, env_period), [0 propA*env_period env_period]) == 1 ;
 
             %first run simulation for partner preference strategy 
-            sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, l, rtot*preference, rtot*preference, rtot*(1-preference), rtot*(1-preference), e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, mN, Ntot, envA_treat), tspan, x0);
+            sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, lambda, rtot*preference, rtot*preference, rtot*(1-preference), rtot*(1-preference), e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, mN, Ntot, envA_treat), tspan, x0);
             final_res = deval(sol, tspan(2)-env_period*3:tspan(2));
             results(1,i) = mean(final_res(1,:));
             results2A(1,i) = median(final_res(1,:));
@@ -90,7 +90,7 @@ for init = 1:2 %two rows of different initial conditions
 
 
             %next run simulation for opposite partner preference strategy 
-            sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, l, rtot*(1-preference), rtot*(1-preference), rtot*preference, rtot*preference, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, mN, Ntot, envA_treat), tspan, x0);
+            sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, lambda, rtot*(1-preference), rtot*(1-preference), rtot*preference, rtot*preference, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, mN, Ntot, envA_treat), tspan, x0);
             final_res = deval(sol, tspan(2)-env_period*3:tspan(2));
             results(2,i) = mean(final_res(1,:));
 
@@ -99,7 +99,7 @@ for init = 1:2 %two rows of different initial conditions
             results2B(3,i) = quantile(final_res(1,:), .75);
 
             %run simulation for reward strategy 50:50
-            sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, l, rtot/2, rtot/2, rtot/2, rtot/2, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, mN, Ntot, envA_treat), tspan, x0);
+            sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, lambda, rtot/2, rtot/2, rtot/2, rtot/2, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, mN, Ntot, envA_treat), tspan, x0);
             final_res = deval(sol, tspan(2)-env_period*3:tspan(2));
             results(3,i) = mean(final_res(1,:));
 

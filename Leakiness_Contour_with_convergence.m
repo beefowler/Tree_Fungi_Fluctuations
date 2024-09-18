@@ -14,7 +14,7 @@ clf
 g = .1; %growth of plant proportional to Nitrogen pool
 a = .04; %allocation of nonstructural carbon to mychorrhizal carbon pool
 s = 0.01; %senesence of nonstructural carbon
-gamma = 0.005; %loss of mycorrhizal carbon pool to environment
+lambda = 0.005; %loss of mycorrhizal carbon pool to environment
 e1 = 0.01; %efficiency of fungus 1 carbon uptake
 e2 = 0.01; %efficiency of fungus 2 carbon uptake
 m1 = 0.005; %fungus 1 mortality
@@ -71,7 +71,7 @@ for k = 1:length(env_periods) % For each of the panels
             while converged == 0 %keep repeating until solution has converged
 
                 %simulate
-                sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, gamma, rtot*(1-leakiness), rtot*leakiness, rtot*leakiness, rtot*(1-leakiness), e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
+                sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, lambda, rtot*(1-leakiness), rtot*leakiness, rtot*leakiness, rtot*(1-leakiness), e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
 
                 thirdtolast = deval(sol, tspan(2)-env_period*3:tspan(2)-env_period*2);
                 last = deval(sol, tspan(2)-env_period:tspan(2));
