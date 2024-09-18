@@ -14,7 +14,7 @@
 g = .1; %growth of plant proportional to Nitrogen pool
 a = .04; %allocation of nonstructural carbon to mychorrhizal carbon pool
 s = 0.01; %senesence of nonstructural carbon
-gamma = 0.005; %loss of mycorrhizal carbon pool to environment
+lambda = 0.005; %loss of mycorrhizal carbon pool to environment
 e1 = 0.01; %efficiency of fungus 1 carbon uptake
 m1 = 0.005; %fungus 1 mortality
 u1_A = 1; %uptake of Nitrogen by fungus 1 in environment type A
@@ -84,7 +84,7 @@ for c = 1:3 %vary efficiencies of fungus 2
            r1 = rtot / (4/5 + 1);
            r2 = rtot - r1;
 
-           sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, gamma, r1, r1, r2, r2, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
+           sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, lambda, r1, r1, r2, r2, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
            final_res = deval(sol, tspan(2)-env_period*3:tspan(2));
 
            results2A(1,i) = median(final_res(1,:));
@@ -96,7 +96,7 @@ for c = 1:3 %vary efficiencies of fungus 2
            r2 = r1;
            r1 = swap;
 
-           sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, gamma, r1, r1, r2, r2, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
+           sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, lambda, r1, r1, r2, r2, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
            final_res = deval(sol, tspan(2)-env_period*3:tspan(2));
 
 
@@ -108,7 +108,7 @@ for c = 1:3 %vary efficiencies of fungus 2
            r1 = rtot/2;
            r2 = rtot/2;
 
-           sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, gamma, r1, r1, r2, r2, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
+           sol = ode45(@(t, x) leaky_or_loyal_coexistence(t, x, g, a, s, lambda, r1, r1, r2, r2, e1, e2, m1, m2, d1_1, d2_1, d1_2, d2_2, u1_A, u1_B, u2_A, u2_B, sN, Ntot, envA_treat), tspan, x0);
            final_res = deval(sol, tspan(2)-env_period*3:tspan(2));
 
            results3(1,i) = median(final_res(1,:));
